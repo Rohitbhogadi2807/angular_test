@@ -1,0 +1,83 @@
+<h2>employee work list</h2>
+<br>
+
+<form name="addEmp" #addEmpForm="ngForm" (ngSubmit)="addEmpForm.valid && addEmployee(addEmpForm)">
+    <!-- {{employee|json}} -->
+    <table border="1" cellPadding="10" cellspacing="0">
+        <tr>
+            <td>Enter Employee Id</td>
+            <td>
+                <input type="text" name="empId" #empId="ngModel" [(ngModel)]="employee.empId"
+                    placeholder="Employee Id" required=""> <br>
+                    <span
+                    *ngIf="(empId.invalid && empId.touched) || (empId.invalid && addEmpForm.submitted)">EmployeeId
+                     is mandatory</span>
+               
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Employee Name</td>
+            <td>
+                <input type="text" name="empName" #empName="ngModel" [(ngModel)]="employee.empName"
+                    placeholder="Employee Name"  required="" > <br>
+                    <span
+                    *ngIf="(empName.invalid && empName.touched) || (empName.invalid && addEmpForm.submitted)">EmployeeName
+                     is mandatory</span>
+               
+             
+        </tr>
+        <tr>
+            <td>Enter Employee DOB</td>
+            <td>
+                <input type="text" name="empDOB" #empDOB="ngModel" [(ngModel)]="employee.empDOB"
+                    placeholder="Employee DOB" required=""> <br>
+                    <span
+                    *ngIf="(empDOB.invalid && empDOB.touched) || (empDOB.invalid && addEmpForm.submitted)">EmployeeDoB
+                     is mandatory</span>
+              
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Employee Phone Number</td>
+            <td>
+                <input type="text" name="empPhoneNo" #empPhoneNo="ngModel" [(ngModel)]="employee.empPhoneNo"
+                    placeholder="Employee PhoneNo" required=""><br>
+                    <span
+                    *ngIf="(empPhoneNo.invalid && empPhoneNo.touched) || (empPhoneNo.invalid && addEmpForm.submitted)">EmployeePhonenNumber
+                     is mandatory</span>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="{{isEdit==true?'Update Employee':'Add Employee'}}">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<br>
+<br>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Emp. Id</th>
+            <th>Emp. Name</th>
+            <th>Emp. DOB</th>
+            <th>Emp. PhoneNo</th>
+            <th>Emp. Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of employees">
+            <td>{{emp.empId}}</td>
+            <td>{{emp.empName}}</td>
+            <td>{{emp.empDOB}}</td>
+            <td align="center">{{emp.empPhoneNo==null?'--':emp.empPhoneNo}}</td>
+            <td align="center">
+                <a [routerLink]="[]" (click)="editEmployee(emp)">Edit</a> &nbsp;|&nbsp;
+                <a [routerLink]="[]" (click)="deleteEmployee(emp)">Delete</a>
+        </tr>
+    </tbody>
+</table>
